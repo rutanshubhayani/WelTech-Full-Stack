@@ -16,8 +16,7 @@
 </head>
 
 <body>
-    <div id="content"></div> <!-- Container for displaying user posts -->
-
+    <div id="content"></div>
     <script>
         function fetchUserData() {
             const userUrl = 'https://jsonplaceholder.typicode.com/users';
@@ -37,17 +36,13 @@
             users.forEach(user => {
                 const userPosts = posts.filter(post => post.userId === user.id);
                 if (userPosts.length > 0) {
-                    // Create a container for the user's posts
                     const userDiv = document.createElement('div');
                     userDiv.classList.add('user-post');
 
-                    // Add user information
                     userDiv.innerHTML = `<h3>Name: ${user.name}</h3><p>Email: ${user.email}</p><p>User ID: ${user.id}</p>`;                    
 
-                    // Create a list for the user's posts
                     const postList = document.createElement('ul');
 
-                    // Add each post to the list
                     userPosts.forEach(post => {
                         const listItem = document.createElement('li');
                         listItem.textContent = post.title;
@@ -60,7 +55,6 @@
             });
         }
 
-        // Call the fetchUserData function and handle the promise
         fetchUserData()
             .then(([users, posts]) => {
                 displayUserPosts(users, posts);
