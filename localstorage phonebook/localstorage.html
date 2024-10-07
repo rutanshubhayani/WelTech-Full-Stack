@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="text" id="term" />
+    <input type="submit" value="save" onclick="saveInfo()" />
+
+    <ul id="display">
+
+    </ul>
+
+    <script>
+        //edit you need to do it
+
+        function display() {
+            let a = JSON.parse(localStorage.getItem("items")) || [];
+
+            let items = a.map((element, index) => {
+
+                return `<li>${element}</li><button onclick="removeItem(${index})">Delete</button>`
+            });
+
+            document.getElementById("display").innerHTML = items.join(" ");
+
+        }
+        function saveInfo() {
+
+            let a = JSON.parse(localStorage.getItem("items")) || [];
+
+            let p = document.getElementById("term").value;
+
+            a.push(p)
+            localStorage.setItem("items", JSON.stringify(a));
+            display();
+        }
+
+        function removeItem(index) {
+            let a = JSON.parse(localStorage.getItem("items")) || [];
+            a.splice(index, 1);
+
+            localStorage.setItem("items", JSON.stringify(a));
+            display();
+        }
+
+        display();
+    </script>
+
+</body>
+
+</html>

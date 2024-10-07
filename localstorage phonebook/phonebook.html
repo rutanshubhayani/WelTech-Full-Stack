@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Book</title>
+</head>
+
+<body>
+    <input type="text" id="name" placeholder="Enter name" />
+    <input type="number" id="number" placeholder="Enter number" />
+    <input type="submit" value="Save" onclick="SaveContact()" />
+
+    <ul id="display"></ul>
+
+    <script>
+        function display() {
+            let contacts = JSON.parse(localStorage.getItem("items")) || [];
+
+            let items = contacts.map((contact, index) => {
+                return `<li>${contact.name}: ${contact.number}</li> <button onclick="removeItem(${index})">delete</button>`;
+            });
+
+            document.getElementById("display").innerHTML = items.join("");
+        }
+
+        function SaveContact() {
+            let contacts = JSON.parse(localStorage.getItem("items")) || [];
+
+            let name = document.getElementById("name").value;
+            let number = document.getElementById("number").value;
+
+            if (name && number) {
+                contacts.push({ name: name, number: number });
+                localStorage.setItem("items", JSON.stringify(contacts));
+                display();
+
+                document.getElementById("name").value = '';
+                document.getElementById("number").value = '';
+            } else {
+                alert("Please enter both name and number.");
+            }
+        }
+
+        function removeItem(index) {
+            let contacts = JSON.parse(localStorage.getItem("items")) || [];
+
+            contacts.splice(index, 1);
+            localStorage.setItem("items", JSON.stringify(contacts));
+            display();
+        }
+
+        document.getElementById("name").addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                SaveContact();
+                event.preventDefault();
+            }
+        });
+
+        document.getElementById("number").addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                SaveContact();
+                event.preventDefault(); 
+            }
+        });
+
+        display();
+    </script>
+</body>
+
+</html>

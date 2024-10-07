@@ -1,0 +1,82 @@
+.array-input {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 50%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.container-fluid {
+    background-color: #f1f5f8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.heading {
+    color: darkblue;
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.items {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.sbtn {
+    background-color: lightblue;
+    color: darkblue;
+    letter-spacing: 1px;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.clear-input-btn {
+    display: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.clear-input-btn.show {
+    display: inline;
+}
+
+.items-container {
+    width: 50%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    text-align: center;
+}
+
+.item {
+    background: #e9ecef;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+}
+
+@media only screen and (max-width: 500px) {
+
+    .array-input,
+    .items-container {
+        width: 80%;
+    }
+}

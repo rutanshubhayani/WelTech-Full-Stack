@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Animation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f5f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .counter-section {
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .counter {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 150px;
+        }
+
+        .counter h2 {
+            font-size: 40px;
+            margin: 0;
+            color: #2c3e50;
+        }
+        
+        .counter p {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="counter-section">
+        <div class="counter">
+            <h2 id="projects">0</h2>
+            <p>Succeeded Projects</p>
+        </div>
+        <div class="counter">
+            <h2 id="hours">0</h2>
+            <p>Working Hours Spent</p>
+        </div>
+        <div class="counter">
+            <h2 id="clients">0</h2>
+            <p>Happy Clients</p>
+        </div>
+    </div>
+
+    <script>
+        function animateCounter(id, start, end, duration) {
+            let obj = document.getElementById(id);
+            let range = end - start;
+            let increment = Math.ceil(range / (duration / 10)); // Larger step increments
+            let current = start;
+            let timer = setInterval(function () {
+                current += increment;
+                if (current >= end) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                obj.textContent = current.toLocaleString() + '+'; // Add commas and a plus sign
+            }, 10); // Update every 10ms for smoother animation
+        }
+
+        // Animate counters when the page loads
+        window.onload = function () {
+            animateCounter("projects", 0, 5820, 800);  // 500+ Projects in 1 second
+            animateCounter("hours", 0, 17140, 800);   // 17140+ Hours in 1 second
+            animateCounter("clients", 0, 8332, 800);  // 1500+ Clients in 1 second
+        };
+    </script>
+
+</body>
+
+</html>

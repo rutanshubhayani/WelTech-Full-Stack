@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Posts</title>
+    <style>
+        .user-post {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content"></div> <!-- Container for displaying user posts -->
+
+    <script>
+        function fetchUserData() {
+            const userUrl = 'https://jsonplaceholder.typicode.com/users';
+            const postUrl = 'https://jsonplaceholder.typicode.com/posts';
+
+            // Fetch users and posts concurrently
+            return Promise.all([
+                fetch(userUrl).then(response => response.json()),
+                fetch(postUrl).then(response => response.json())
+            ]);
+        }
+
+        function displayUserPosts(users, posts) {
+            const contentDiv = document.getElementById('content');
+
+            // Iterate over users and find their posts
+            users.forEach(user => {
+                const userPosts = posts.filter(post => post.userId === user.id);
+                if (userPosts.length > 0) {
+                    // Create a container for the user's posts
+                    const userDiv = document.createElement('div');
+                    userDiv.classList.add('user-post');
+
+                    // Add user information
+                    userDiv.innerHTML = `<h3>Name: ${user.name}</h3><p>Email: ${user.email}</p><p>User ID: ${user.id}</p>`;                    
+
+                    // Create a list for the user's posts
+                    const postList = document.createElement('ul');
+
+                    // Add each post to the list
+                    userPosts.forEach(post => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = post.title;
+                        postList.appendChild(listItem);
+                    });
+
+                    userDiv.appendChild(postList);
+                    contentDiv.appendChild(userDiv);
+                }
+            });
+        }
+
+        // Call the fetchUserData function and handle the promise
+        fetchUserData()
+            .then(([users, posts]) => {
+                displayUserPosts(users, posts);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    </script>
+</body>
+
+</html>
